@@ -1,328 +1,196 @@
-# Roehne River Turbidity Estimation from Satellite Images
+# 🌊 Rhône River Turbidity Analysis from Satellite Images
 
-A comprehensive Python project for estimating water turbidity in the Roehne river using satellite imagery and machine learning techniques.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org/)
 
-## Overview
+A comprehensive Python project for estimating water turbidity in the Rhône River using Sentinel-2 satellite imagery and multi-spectral analysis techniques.
 
-This project provides tools and workflows for:
-- Acquiring satellite imagery from multiple sources (Sentinel-2, Landsat)
-- Preprocessing satellite data for water quality analysis
-- Training machine learning models for turbidity estimation
-- Generating turbidity maps and visualizations
-- Analyzing temporal trends in water quality
+## 🎯 Overview
 
-## Project Structure
+This project provides a complete workflow for satellite-based water quality monitoring:
+- **Multi-temporal analysis** using Sentinel-2 L2A imagery
+- **Advanced spectral indices** for turbidity estimation (NDTI, Red/Green ratio, TSM proxy)
+- **Automated water body detection** using NIR and SWIR bands
+- **Quantitative turbidity estimation** in NTU (Nephelometric Turbidity Units)
+- **Interactive visualizations** ready for scientific presentations
+- **Temporal trend analysis** across multiple acquisition dates
+
+## 🚀 Key Features
+
+### 🛰️ Satellite Data Processing
+- **Sentinel-2 L2A**: Atmospheric corrected, analysis-ready data
+- **Multi-band analysis**: Blue, Green, Red, NIR, SWIR bands
+- **Flexible data loading**: Support for multiple dates and missing bands
+- **Quality assessment**: Automated band availability checking
+
+### 🔬 Water Quality Analysis
+- **Turbidity indices**: NDTI, Red/Green ratio, Total Suspended Matter proxy
+- **Water detection**: Advanced NIR+SWIR masking algorithms
+- **NTU estimation**: Empirical conversion from spectral reflectance
+- **Quality classification**: Excellent, Good, Fair, Poor water quality ratings
+
+### 📊 Visualization & Reporting
+- **Multi-temporal maps**: Side-by-side comparison across dates
+- **Trend analysis**: Temporal evolution of water quality parameters
+- **Presentation-ready outputs**: High-quality figures for scientific communication
+- **Export capabilities**: HTML and PDF report generation
+
+## 📁 Project Structure
 
 ```
 Water/
-├── data/                          # Data storage
-│   ├── satellite/                 # Raw satellite imagery
-│   ├── ground_truth/             # In-situ measurements
-│   └── processed/                # Preprocessed data
-├── src/                          # Source code modules
-│   ├── satellite_data.py         # Data acquisition and preprocessing
-│   ├── turbidity_estimation.py   # ML models for turbidity estimation
-│   └── visualization.py          # Plotting and visualization
-├── notebooks/                    # Jupyter notebooks
-│   └── roehne_turbidity_analysis.ipynb
-├── output/                       # Analysis results
-│   ├── models/                   # Trained ML models
-│   ├── maps/                     # Generated turbidity maps
-│   ├── reports/                  # Analysis reports
-│   └── figures/                  # Visualizations
-├── docs/                         # Documentation
-├── tests/                        # Unit tests
-├── main.py                       # Main analysis script
-├── requirements.txt              # Python dependencies
-└── README.md                     # This file
+├── 📁 data/                       # Data storage
+│   └── 📁 satellite/             # Sentinel-2 satellite imagery
+├── 📁 src/                       # Source code modules
+│   ├── 🐍 satellite_data.py      # Data acquisition and preprocessing
+│   ├── 🐍 turbidity_estimation.py # Turbidity analysis algorithms
+│   └── 🐍 visualization.py       # Plotting and visualization
+├── 📁 notebooks/                 # Jupyter notebooks for analysis
+│   ├── 📓 rhone_turbidity_clean.ipynb # Main analysis notebook
+│   └── 📁 data/                  # Notebook-specific data
+├── 📁 output/                    # Analysis results
+│   ├── 📁 models/                # Analysis models and parameters
+│   ├── 📁 maps/                  # Generated turbidity maps
+│   ├── 📁 reports/               # Analysis reports
+│   └── 📁 figures/               # Visualization outputs
+├── 🐍 main.py                    # Main analysis script
+├── 📄 requirements.txt           # Python dependencies
+└── 📖 README.md                  # This documentation
 ```
 
-## Features
-
-### Data Acquisition
-- **Sentinel-2**: High-resolution multispectral imagery
-- **Landsat**: Long-term historical data
-- **Google Earth Engine**: Cloud-based processing
-- **Automatic cloud filtering**: Quality control
-
-### Turbidity Estimation
-- **Spectral indices**: NDWI, MNDWI, custom turbidity indices
-- **Machine learning models**: Random Forest, Gradient Boosting, Linear Regression
-- **Feature engineering**: Multi-band ratios and transformations
-- **Model validation**: Cross-validation and performance metrics
-
-### Visualization
-- **Turbidity maps**: Spatial distribution visualization
-- **Time series analysis**: Temporal trends
-- **Classification maps**: Water quality categories
-- **Statistical plots**: Histograms, scatter plots, correlation matrices
-
-## Installation
+## 🛠️ Installation
 
 ### Prerequisites
-
-- Python 3.8+ 
-- Git
-- GDAL (for geospatial libraries)
+- Python 3.9 or higher
+- Git (for cloning the repository)
 
 ### Quick Start
 
-1. **Clone and navigate to the repository**:
-   ```bash
-   cd /Users/danuta.paraficz/PyProjects/Water
-   ```
-
-2. **Create and activate virtual environment**:
-   ```bash
-   python -m venv turbidity_env
-   source turbidity_env/bin/activate  # On macOS/Linux
-   # turbidity_env\Scripts\activate     # On Windows
-   ```
-
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Set up environment variables**:
-   ```bash
-   cp .env.template .env
-   # Edit .env with your API credentials
-   ```
-
-5. **Run the analysis**:
-   ```bash
-   python main.py
-   ```
-
-### Full Installation (with geospatial libraries)
-
-For complete functionality, install geospatial dependencies:
-
+1. **Clone the repository**
 ```bash
-# Using conda (recommended for geospatial packages)
-conda create -n turbidity python=3.9
-conda activate turbidity
-conda install -c conda-forge rasterio geopandas earthengine-api sentinelsat
+git clone https://github.com/YOUR_USERNAME/rhone-river-turbidity-analysis.git
+cd rhone-river-turbidity-analysis
+```
+
+2. **Create a virtual environment**
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. **Install dependencies**
+```bash
 pip install -r requirements.txt
 ```
 
-## Usage
-
-### Interactive Analysis
-
-Use the Jupyter notebook for interactive analysis:
-
+4. **Launch Jupyter Notebook**
 ```bash
-jupyter notebook notebooks/roehne_turbidity_analysis.ipynb
+jupyter notebook notebooks/rhone_turbidity_clean.ipynb
 ```
 
-### Command Line
+## 📊 Usage
 
-Run the complete analysis workflow:
+### Running the Analysis
 
-```bash
-python main.py
-```
+The main analysis is contained in the Jupyter notebook `notebooks/rhone_turbidity_clean.ipynb`. This notebook provides:
 
-### Programmatic Usage
+1. **Data Loading**: Automated loading of Sentinel-2 L2A data for multiple dates
+2. **Spectral Analysis**: Calculation of turbidity indices (NDTI, Red/Green ratio, TSM)
+3. **Water Detection**: Automated water body identification
+4. **Turbidity Estimation**: Quantitative NTU calculations
+5. **Visualization**: Multi-temporal maps and trend analysis
+6. **Reporting**: Summary statistics and water quality assessment
 
-```python
-from src.satellite_data import SatelliteDataManager
-from src.turbidity_estimation import TurbidityEstimator
-from src.visualization import plot_turbidity_map
+### Sample Data
 
-# Initialize components
-satellite_manager = SatelliteDataManager()
-estimator = TurbidityEstimator()
+The repository includes sample Sentinel-2 data for three dates:
+- **June 29, 2025**: Complete dataset (5 bands)
+- **July 9, 2025**: Partial dataset (4 bands)
+- **July 17, 2025**: Complete dataset (5 bands)
 
-# Acquire and process data
-search_results = satellite_manager.search_sentinel2_data('2023-01-01', '2023-12-31')
+### Adding Your Own Data
 
-# Train model and estimate turbidity
-# ... (see examples in notebooks/)
-```
+To analyze your own Sentinel-2 data:
 
-## Data Sources and APIs
+1. Place TIFF files in `notebooks/data/satellite/new1/`
+2. Follow the naming convention: `YYYY-MM-DD-HH:MM_YYYY-MM-DD-HH:MM_Sentinel-2_L2A_BXX_(Raw).tiff`
+3. Update the date list in the notebook's data loading section
 
-### Satellite Data Access
+## 📈 Example Results
 
-1. **Sentinel Hub** (recommended):
-   - Register at: https://services.sentinel-hub.com/
-   - Free tier available
-   - High-quality, preprocessed data
+The analysis provides comprehensive insights including:
 
-2. **Google Earth Engine**:
-   - Register at: https://earthengine.google.com/
-   - Cloud-based processing
-   - Extensive data catalog
+- **Water Coverage**: Percentage of study area covered by water
+- **Turbidity Levels**: Quantitative measurements in NTU
+- **Water Quality Classification**: Automated quality assessment
+- **Temporal Trends**: Changes over time across multiple dates
+- **Spatial Distribution**: Maps showing turbidity hotspots
 
-3. **NASA Earthdata**:
-   - Register at: https://urs.earthdata.nasa.gov/
-   - Landsat and MODIS data
-   - Free access
+## 🔬 Scientific Methodology
 
-### Ground Truth Data
+### Spectral Indices Used
 
-For model training and validation, you'll need in-situ turbidity measurements. Sources include:
-- Local water quality monitoring stations
-- Field sampling campaigns
-- Water authority databases
-- Research collaborations
+- **NDTI (Normalized Difference Turbidity Index)**: `(Red - Green) / (Red + Green)`
+- **Red/Green Ratio**: Direct ratio for turbidity indication
+- **Total Suspended Matter Proxy**: SWIR band reflectance
 
-## Methodology
+### Water Detection Algorithm
 
-### Turbidity Estimation Approach
+- **Primary**: NIR < 0.12 AND SWIR < 0.15
+- **Fallback**: NIR < 0.12 (when SWIR unavailable)
 
-1. **Data Preprocessing**:
-   - Atmospheric correction
-   - Cloud masking
-   - Geometric correction
-   - Temporal compositing
+### Turbidity Estimation
 
-2. **Feature Extraction**:
-   - Spectral band reflectances
-   - Water quality indices (NDWI, MNDWI)
-   - Band ratios and transformations
-   - Texture features
+- **Empirical conversion**: Red reflectance × 200 = NTU estimate
+- **Quality thresholds**: 
+  - Excellent: < 5 NTU
+  - Good: 5-25 NTU
+  - Fair: 25-50 NTU
+  - Poor: > 50 NTU
 
-3. **Model Training**:
-   - Random Forest regression
-   - Gradient boosting
-   - Cross-validation
-   - Hyperparameter tuning
+## 🤝 Contributing
 
-4. **Validation**:
-   - Independent test set
-   - Statistical metrics (R², RMSE, MAE)
-   - Spatial and temporal validation
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-### Roehne River Specifics
-
-- **Location**: Germany (approximate coordinates: 51.5-52.0°N, 8.0-8.5°E)
-- **Water type**: River system
-- **Typical turbidity range**: 5-100 NTU
-- **Seasonal patterns**: Spring snowmelt, summer low flow, autumn storms
-
-## Results and Outputs
-
-### Generated Files
-
-- **Turbidity maps**: GeoTIFF format with spatial projections
-- **Time series data**: CSV files with temporal analysis
-- **Model files**: Trained models saved as joblib files
-- **Reports**: Automated analysis summaries
-- **Visualizations**: PNG/PDF plots and maps
-
-### Performance Metrics
-
-Typical model performance on synthetic data:
-- **R²**: 0.85-0.95
-- **RMSE**: 3-8 NTU
-- **MAE**: 2-5 NTU
-
-## Configuration
-
-### Environment Variables
-
-Key settings in `.env` file:
-```bash
-# API Credentials
-SENTINEL_USERNAME=your_username
-SENTINEL_PASSWORD=your_password
-GOOGLE_APPLICATION_CREDENTIALS=path/to/service-account.json
-
-# Study Area (Roehne River)
-ROEHNE_MIN_LON=8.0
-ROEHNE_MAX_LON=8.5
-ROEHNE_MIN_LAT=51.5
-ROEHNE_MAX_LAT=52.0
-
-# Analysis Parameters
-DEFAULT_CLOUD_COVER_THRESHOLD=20
-```
-
-### Model Parameters
-
-Adjust model settings in `src/turbidity_estimation.py`:
-- Number of estimators
-- Cross-validation folds
-- Feature selection methods
-- Validation metrics
-
-## Contributing
+### Development Setup
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit changes (`git commit -am 'Add new feature'`)
-4. Push to branch (`git push origin feature/new-feature`)
-5. Create Pull Request
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Troubleshooting
+## 📄 License
 
-### Common Issues
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-1. **GDAL installation errors**:
-   ```bash
-   # Use conda for easier GDAL installation
-   conda install -c conda-forge gdal
-   ```
+## 📚 Citation
 
-2. **API authentication errors**:
-   - Verify credentials in `.env` file
-   - Check API quota limits
-   - Ensure proper account registration
+If you use this project in your research, please cite:
 
-3. **Memory issues with large images**:
-   - Process smaller tiles
-   - Use image pyramids
-   - Increase system memory
+```bibtex
+@software{rhone_turbidity_analysis,
+  title={Rhône River Turbidity Analysis from Satellite Images},
+  author={Your Name},
+  year={2025},
+  url={https://github.com/YOUR_USERNAME/rhone-river-turbidity-analysis}
+}
+```
 
-4. **Missing ground truth data**:
-   - Use synthetic data for testing
-   - Contact local water authorities
-   - Check research databases
+## 🙏 Acknowledgments
 
-### Performance Optimization
+- **Sentinel-2 Data**: European Space Agency (ESA) Copernicus Programme
+- **Python Libraries**: NumPy, Matplotlib, Rasterio, SciPy
+- **Inspiration**: Environmental monitoring and water quality research community
 
-- Use cloud computing for large-scale analysis
-- Implement parallel processing for multiple images
-- Cache preprocessed data
-- Use image pyramids for visualization
+## 📞 Contact
 
-## References
-
-### Scientific Literature
-
-1. Dörnhöfer, K., & Oppelt, N. (2016). Remote sensing for lake research and monitoring–Recent advances. *Ecological Indicators*, 64, 105-122.
-
-2. Olmanson, L. G., et al. (2008). A 20-year Landsat water clarity census of Minnesota's 10,000 lakes. *Remote Sensing of Environment*, 112(11), 4086-4097.
-
-3. Nechad, B., et al. (2010). Calibration and validation of a generic multisensor algorithm for mapping of total suspended matter in turbid waters. *Remote Sensing of Environment*, 114(4), 854-866.
-
-### Technical Resources
-
-- [Sentinel-2 User Handbook](https://sentinel.esa.int/documents/247904/685211/Sentinel-2_User_Handbook)
-- [Google Earth Engine Guides](https://developers.google.com/earth-engine/guides)
-- [GDAL Documentation](https://gdal.org/index.html)
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Support
-
-- **Issues**: Report bugs and feature requests via GitHub Issues
-- **Discussions**: Use GitHub Discussions for questions and ideas
-- **Email**: Contact the maintainers for collaboration opportunities
-
-## Acknowledgments
-
-- European Space Agency (ESA) for Sentinel-2 data
-- NASA for Landsat data
-- Google Earth Engine team
-- Open source geospatial community
+- **Author**: Your Name
+- **Email**: your.email@example.com
+- **Institution**: Your Institution
+- **Project Link**: [https://github.com/YOUR_USERNAME/rhone-river-turbidity-analysis](https://github.com/YOUR_USERNAME/rhone-river-turbidity-analysis)
 
 ---
 
-**Note**: This project is for research and educational purposes. For operational water quality monitoring, consult with domain experts and validate results with ground truth measurements.
+⭐ **Star this repository if you find it useful!** ⭐
