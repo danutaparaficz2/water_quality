@@ -5,6 +5,8 @@
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org/)
 
 A comprehensive Python project for estimating water turbidity in the Rhône River using Sentinel-2 satellite imagery and multi-spectral analysis techniques.
+<img width="939" height="558" alt="image" src="https://github.com/user-attachments/assets/16750378-839d-473f-a644-be89e2b28acc" />
+
 
 ## 🎯 Overview
 
